@@ -20,6 +20,14 @@ class Posts extends Component {
 componentWillMount(){
     this.props.fetchPosts();
 }
+
+componentWillReceiveProps(nextProps){
+    if(nextProps.newPost){
+       this.props.posts.unshift(nextProps.newPost);//adding in front of a list
+       //this.props.posts.push(nextProps.newPost);//adding to a end of a list
+
+    }
+}
 /*
     render() {
         const postItems=this.state.posts.map(post=>(
@@ -55,10 +63,12 @@ render() {
 
 Posts.propTypes={
     fetchPosts: PropTypes.func.isRequired,
-    posts: PropTypes.array.isRequired
+    posts: PropTypes.array.isRequired,
+    newPost:PropTypes.object
 }
 const mapStateToProps = state =>({
-    posts:state.posts.items//because in index.js in reducers we have used posts
+    posts:state.posts.items,//because in index.js in reducers we have used posts
+    newPost:state.posts.item
 })
 //export default Posts;
 export default connect(mapStateToProps,{fetchPosts})(Posts)//coonect(map our state to the properties)
