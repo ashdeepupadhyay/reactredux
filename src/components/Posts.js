@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-
+import {connect } from 'react-redux';
+import {fetchPosts} from '../actions/postActions'
 class Posts extends Component {
-
+/*
     constructor(props){
         super(props);
         this.state={
@@ -14,7 +15,11 @@ class Posts extends Component {
         .then(res=>res.json())
         .then(data=>this.setState({posts:data}));
     }
-
+*/
+componentWillMount(){
+    this.props.fetchPosts();
+}
+/*
     render() {
         const postItems=this.state.posts.map(post=>(
             <div key={post.id}>
@@ -30,5 +35,25 @@ class Posts extends Component {
         )
     }
 }
+*/
+render() {
+    const postItems=this.props.posts.map(post=>(
+        <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+        </div>
+    ));
+    return (
+    <div>
+        <h1>Posts</h1>
+        {postItems}
+    </div>
+    )
+}
+}
 
-export default Posts;
+const mapStateToProps = state =>({
+    posts:state.posts.items//because in index.js in reducers we have used posts
+})
+//export default Posts;
+export default connect(mapStateToProps,{fetchPosts})(Posts)//coonect(map our state to the properties)
