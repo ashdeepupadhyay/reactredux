@@ -14,7 +14,11 @@ export default function(state=initialState,action){
                 ...state,//spread operator
                 items:action.payload
             }
-            
+        case NEW_POST:
+            return{
+                ...state,
+                item:action.payload
+            };    
         default:
             return state;
     }
