@@ -6,7 +6,8 @@ import { createStore,applyMiddleware } from 'redux';
 
 import Posts from './components/Posts';
 import PostForm from './components/Postform'
-const store=createStore(()=>[],{},applyMiddleware());//createStore(reducer,[preloaded state],enhancer)
+import store from './store';
+//const store=createStore(()=>[],{},applyMiddleware());//createStore(reducer,[preloaded state],enhancer)
 
 
 class App extends Component {
